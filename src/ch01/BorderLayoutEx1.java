@@ -28,7 +28,7 @@ public class BorderLayoutEx1 extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 창 "X"를 누르면 닫히도록 해줌.
 		buttons = new JButton[5];
-
+		kDirect = new String[5];
 		
 		
 		
@@ -40,7 +40,7 @@ public class BorderLayoutEx1 extends JFrame {
 		setLayout(new BorderLayout());
 		
 		for (int i = 0; i < buttons.length; i++) {
-				add(new JButton(directions[i]));
+				add(new JButton(directions[i]), kDirect[i]);
 			}
 		}
 		
