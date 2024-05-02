@@ -1,9 +1,7 @@
-package bubblebubble.test.ex03;
-
+package bubblebubble.test.ex04;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
 
 public class Player extends JLabel implements Movealbe {
 
@@ -16,13 +14,23 @@ public class Player extends JLabel implements Movealbe {
 	private boolean right;
 	private boolean up;
 	private boolean down;
-
+	
+	// 벽에 충돌한 상태
+	private boolean leftWallCrash;
+	private boolean rightWallCrash;
+	private boolean upWallCrash;
+	
+	// Get in blue wall
+	private boolean centerWallCrash;
+	
 	// 플레이어 속도 상태
 	private final int SPEED = 4;
-	private final int JUMPSPEED = 2;
-	
+	private final int JUMPSPEED = 4;
+
 	
 	//setter
+	
+	
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
@@ -34,7 +42,6 @@ public class Player extends JLabel implements Movealbe {
 	}
 	
 	
-
 	public int getX() {
 		return x;
 	}
@@ -65,6 +72,30 @@ public class Player extends JLabel implements Movealbe {
 	public void setDown(boolean down) {
 		this.down = down;
 	}
+	public boolean isLeftWallCrash() {
+		return leftWallCrash;
+	}
+	public boolean isRightWallCrash() {
+		return rightWallCrash;
+	}
+	public boolean isUpWallCrash() {
+		return upWallCrash;
+	}
+	public boolean isCenterWallCrash() {
+		return centerWallCrash;
+	}
+	public void setLeftWallCrash(boolean leftWallCrash) {
+		this.leftWallCrash = leftWallCrash;
+	}
+	public void setRightWallCrash(boolean rightWallCrash) {
+		this.rightWallCrash = rightWallCrash;
+	}
+	public void setUpWallCrash(boolean upWallCrash) {
+		this.upWallCrash = upWallCrash;
+	}
+	public void setcenterWallCrash(boolean centerWallCrash) {
+		this.centerWallCrash = centerWallCrash;
+	}
 	public boolean isLeft() {
 		return left;
 	}
@@ -80,15 +111,12 @@ public class Player extends JLabel implements Movealbe {
 	public int getJUMPSPEED() {
 		return JUMPSPEED;
 	}
-	
 	public Player() {
 		initData();
 		setInitLayout();
 
 	}
-	
 
-	
 	private void initData() {
 		playerL = new ImageIcon("img/playerL.png");
 		playerR = new ImageIcon("img/playerR.png");
@@ -102,13 +130,17 @@ public class Player extends JLabel implements Movealbe {
 		right = false;
 		up = false;
 		down = false;
-
-		this.setIcon(playerR); // JLabel 의 기능
-		this.setLocation(x, y);
-		this.setSize(50, 50);
+		
+		leftWallCrash = false;
+		rightWallCrash = false;
+		upWallCrash = false;
+		
 	}
 
 	private void setInitLayout() {
+		this.setIcon(playerR); // JLabel 의 기능
+		this.setLocation(x, y);
+		this.setSize(50, 50);
 
 	}
 
@@ -179,7 +211,7 @@ public class Player extends JLabel implements Movealbe {
 			
 			@Override
 			public void run() {
-				for (int i = 0; i < 30; i++) {
+				for (int i = 0; i < 60; i++) {
 					y -= JUMPSPEED;
 					setLocation(x, y);
 					try {
@@ -188,6 +220,9 @@ public class Player extends JLabel implements Movealbe {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+				}
+				if(upWallCrash = true) {
+					up = false;
 				}
 				up = false;
 				down();
@@ -207,7 +242,7 @@ public class Player extends JLabel implements Movealbe {
 			
 			@Override
 			public void run() {
-				for(int i = 0; i < 60 / JUMPSPEED; i++) {
+				for(int i = 0; i < 120 / JUMPSPEED; i++) {
 					y += JUMPSPEED;
 					setLocation(x, y);
 					
