@@ -1,4 +1,4 @@
-package bubblebubble.test.ex04;
+package bubblebubble.test.ex06;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,7 +12,6 @@ public class BubbleFrame extends JFrame {
 	private JLabel backgroundMap;
 	// 포함 관계 - 컴포지션
 	private Player player;
-
 	public BubbleFrame() {
 		initData(); // 순서 중요 : 생성 -> 동
 		setInitLayout();
@@ -26,7 +25,7 @@ public class BubbleFrame extends JFrame {
 	private void initData() {
 		// TODO 이미지 변경
 //		backgroundMap = new JLabel(new ImageIcon("img/backgroundMapService.png"));
-		backgroundMap = new JLabel(new ImageIcon("img/backgroundMapService.png"));
+		backgroundMap = new JLabel(new ImageIcon("img/backgroundMap.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Frame --> root panel
 		setContentPane(backgroundMap);
@@ -83,10 +82,10 @@ public class BubbleFrame extends JFrame {
 						
 					}
 					break;
-				case KeyEvent.VK_DOWN:
-					if(!player.isDown() && !player.isCenterWallCrash()) {
-						player.down();
-					}
+			
+				case KeyEvent.VK_SPACE:
+					
+					add(new Bubble(player));
 					break;
 				}
 
@@ -128,7 +127,6 @@ public class BubbleFrame extends JFrame {
 	public static void main(String[] args) {
 		new BubbleFrame();
 		
-		String smile = null;
 	} // end of main
 
 }

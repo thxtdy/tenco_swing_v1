@@ -1,4 +1,4 @@
-package bubblebubble.test.ex04;
+package bubblebubble.test.ex05;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,7 +12,6 @@ public class BubbleFrame extends JFrame {
 	private JLabel backgroundMap;
 	// 포함 관계 - 컴포지션
 	private Player player;
-
 	public BubbleFrame() {
 		initData(); // 순서 중요 : 생성 -> 동
 		setInitLayout();
@@ -88,6 +87,10 @@ public class BubbleFrame extends JFrame {
 						player.down();
 					}
 					break;
+				case KeyEvent.VK_SPACE:
+					
+					add(new Bubble(player));
+					break;
 				}
 
 			} // end of keyPressed
@@ -128,7 +131,6 @@ public class BubbleFrame extends JFrame {
 	public static void main(String[] args) {
 		new BubbleFrame();
 		
-		String smile = null;
 	} // end of main
 
 }
