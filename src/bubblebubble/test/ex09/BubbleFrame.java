@@ -1,4 +1,4 @@
-package bubblebubble;
+package bubblebubble.test.ex09;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -6,9 +6,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import bubblebubble.components.Enemy;
-import bubblebubble.components.Player;
 
 public class BubbleFrame extends JFrame {
 	
@@ -18,8 +15,6 @@ public class BubbleFrame extends JFrame {
 	private JLabel backgroundMap;
 	// 포함 관계 - 컴포지션
 	private Player player;
-	private Enemy enemy1;
-	
 	public BubbleFrame() {
 		initData(); // 순서 중요 : 생성 -> 동
 		setInitLayout();
@@ -27,7 +22,7 @@ public class BubbleFrame extends JFrame {
 		
 		// Player 백그라운드 서비스 시작
 //		new BackgroundPlayerService(player);
-		
+		new Thread(new BackgroundPlayerService(player)).start();
 		
 	}
 
@@ -42,7 +37,6 @@ public class BubbleFrame extends JFrame {
 		
 		// mContext --> 참조 타입 () --> 주소값의 크기는 기본 4byte.
 		player = new Player(mContext);
-		enemy1 = new Enemy(mContext);
 
 	}
 
@@ -53,7 +47,7 @@ public class BubbleFrame extends JFrame {
 		setLocationRelativeTo(null); // JFrame을 우리 모니터 가운데 자동 배치!
 		setVisible(true);
 		add(player);
-		add(enemy1);
+
 	}
 
 	private void addEventListener() {
@@ -137,9 +131,6 @@ public class BubbleFrame extends JFrame {
 	}
 	public Player getPlayer() {
 		return player;
-	}
-	public Enemy getEnemy() {
-		return enemy1;
 	}
 
 	public static void main(String[] args) {
